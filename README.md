@@ -410,6 +410,7 @@ ROUGE-2: Measures the overlap of bigrams (pairs of consecutive words) between th
 
 ROUGE-L: Focuses on the longest common subsequence between the generated and reference summaries.
 
+![image14](https://github.com/user-attachments/assets/3e740102-b629-4e18-8f5c-d6a560b77c57)
 
 <b>What the graph shows:</b> The bar chart presents the model’s performance on ROUGE-1, ROUGE-2, and ROUGE-L scores. Each metric is broken down into:
 
