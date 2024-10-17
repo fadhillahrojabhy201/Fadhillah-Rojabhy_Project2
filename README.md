@@ -172,6 +172,7 @@ The frequent tri-grams in summaries reflect a strong focus on political figures,
 
 #### 11. Sentiment Analysis for Articles
 Sentiment analysis is conducted on the original articles to determine the overall emotional tone and sentiment polarity (positive, negative, or neutral). Understanding the sentiment of the articles helps ensure that the summarization process maintains the original emotional context and tone.
+
 ![image11](https://github.com/user-attachments/assets/f3fde216-e379-41e2-a267-06b7be064378)
 The histogram shows a significant spike at a sentiment polarity of 0, which corresponds to the high proportion of neutral articles. A smaller distribution is observed for both positive and negative sentiments, with very few articles showing strong sentiment in either direction (extreme values like -1.0 or 1.0).
 The Sentiment Analysis for Articles provides an overview of the sentiment polarity in the news articles. Here are the key results:
