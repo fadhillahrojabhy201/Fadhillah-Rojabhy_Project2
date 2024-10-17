@@ -215,10 +215,23 @@ The sentiment analysis of summaries reveals that nearly all the summaries are ne
 
 #### 13. Top Words in Topics
 Topic modeling, such as Latent Dirichlet Allocation (LDA), is used to uncover the main themes and topics within the dataset. By identifying the top words in various topics, we can understand the content diversity and ensure the model is well-tuned to represent the range of subjects present in the news articles.
+Here are the top words found in the five key topics:
+Topic 1:
+Top Words: yang, dan, ini, dari, itu, dengan, untuk, aceh, dalam, ke
+Description: This topic likely focuses on general news content, with common connectors and references to Aceh indicating a regional focus within Indonesia. The presence of frequent words like ini (this), dari (from), and dalam (in) suggests that the articles may involve descriptions of events or places.
+Topic 2:
+Top Words: yang, dan, dengan, dari, untuk, itu, ini, tidak, ke, akan
+Description: This topic appears to be more context-based, with words such as tidak (no/not) and akan (will) suggesting discussions about future actions or contrasts (e.g., what will happen or what will not). The use of common function words points to coverage of a wide range of news stories.
+Topic 3:
+Top Words: yang, dan, ini, warga, dari, untuk, itu, com, liputan6, dengan
+Description: This topic seems focused on the community or society, given the presence of the word warga (citizens). Mentions of liputan6 and com suggest articles related to the news website itself, potentially covering stories or reports from the Liputan6 team about societal events or updates.
+Topic 4:
+Top Words: yang, dan, itu, ini, jakarta, dalam, akan, untuk, dengan, dari
+Description: This topic is likely centered around events happening in Jakarta, with references to time (akan - will) and place (dalam - in). This topic may focus on regional news and happenings in the capital city.
+Topic 5:
+Top Words: yang, dan, ini, itu, polisi, dengan, dari, tak, jakarta, mereka
+Description: This topic highlights law enforcement and public safety, as indicated by the word polisi (police). The combination of tak (not) and mereka (they) could indicate reports related to police actions, incidents, or investigations, particularly in Jakarta.
 
-Topic 1: yang, dan, ini, dari, itu, dengan, untuk, aceh, dalam, ke
-Topic 2: yang, dan, dengan, dari, untuk, itu, ini, tidak, ke, akan
-Topic 3: yang, dan, ini, warga, dari, untuk, itu, com, liputan6, dengan
-Topic 4: yang, dan, itu, ini, jakarta, dalam, akan, untuk, dengan, dari
-Topic 5: yang, dan, ini, itu, polisi, dengan, dari, tak, jakarta, mereka
+<b>Conclusion:</b>
+These five topics reflect a wide array of subjects covered in the dataset, ranging from general news and societal issues to region-specific events in Jakarta and Aceh, as well as law enforcement. By identifying the top words in each topic, the model can be fine-tuned to generate concise summaries that maintain the essence of these diverse news articles. This topic modeling process ensures that the summarizer captures key themes and context, producing coherent and relevant outputs across different categories of news.
 Each step in the EDA process provides a clearer understanding of the dataset's structure, informing the development and fine-tuning of the Bert2GPT Indonesian Text Summarizer. These insights ensure the model can generate concise, coherent, and contextually accurate summaries across a broad range of news topics.
