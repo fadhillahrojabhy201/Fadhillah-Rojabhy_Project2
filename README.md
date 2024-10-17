@@ -1,4 +1,4 @@
-![image10](https://github.com/user-attachments/assets/9fc6ca88-7f2d-43d6-adba-fe737bcf0b1c)# Automated Text Summarization Using BERT: A Case Study on Indonesian News Articles with the Liputan6 Dataset
+# Automated Text Summarization Using BERT: A Case Study on Indonesian News Articles with the Liputan6 Dataset
 
 ## Introduction
 Text Summarization is a computational technique designed to condense lengthy documents into concise summaries while retaining the most important information. This method helps streamline the process of extracting key insights from large volumes of text, saving time and effort for individuals who need to quickly comprehend important documents. The advancement of natural language processing (NLP) techniques, such as transformer models like BERT, has significantly improved the accuracy and efficiency of automated summarization systems.
