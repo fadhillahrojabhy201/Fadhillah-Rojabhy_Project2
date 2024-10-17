@@ -353,3 +353,37 @@ The code prints the architecture of the model to give a clear overview of how th
 Additionally, it calculates the total number of parameters and the trainable parameters in the model. This information is helpful to understand the model's complexity and its trainable components.
 ### Summary
 The steps taken in this process ensure that the Bert2GPT Indonesian Text Summarizer is effectively prepared for training. By integrating pre-trained BERT and GPT-2 models and configuring special tokens, the model leverages advanced language understanding and text generation capabilities. Checking GPU availability helps optimize the training process for faster results, and understanding the model’s parameters gives insight into its complexity.
+
+## Training Model
+The training process of the Bert2GPT Indonesian Text Summarizer involves a structured approach, consisting of two key phases: Initial Training and Continued Training. 
+### 1. Initial Training
+This phase involves setting up the environment and the necessary configurations to train the model from scratch or from a pre-trained state.
+#### Key Steps in Initial Training:
+##### Training Arguments:
+Define how the training process will be managed, such as:
+1. Max Steps: Total number of training steps (e.g., 20,000 steps).
+2. Batch Sizes: Size of the batches for training and evaluation (e.g., 8 samples per batch).
+3. Warmup Steps: Initial steps where the learning rate increases gradually.
+4. Weight Decay: Regularization technique to avoid overfitting.
+5. Mixed Precision: Enabling mixed precision (FP16) to speed up training by reducing memory usage.
+6. Logging and Checkpoints: Log results at regular intervals and save model checkpoints less frequently to reduce storage requirements.
+#### Trainer Creation:
+A Trainer object is created to handle the training process. It coordinates the loading of data, optimizes the model weights, and evaluates its performance on a validation dataset.
+#### Model Training:
+The actual training begins with the trainer.train() method. This process adjusts the model’s weights to minimize the loss function, gradually improving the model’s performance over time.
+### 2. Continue Training
+The Continued Training phase allows for the refinement of the model after it has been trained for a while. Instead of starting from scratch, training resumes from a saved checkpoint to further enhance performance.
+#### Key Steps in Continued Training:
+##### Loading the Model from a Checkpoint:
+The model and tokenizer are reloaded from a previous checkpoint (e.g., after 15,000 steps). This ensures the training continues from where it last left off.
+##### Defining Continued Training Arguments:
+The training arguments are slightly modified, such as reducing the number of warmup steps or changing how frequently the model is evaluated and checkpoints are saved. The checkpoint path is also specified so the training can resume from that point.
+##### Reinitializing the Trainer:
+A new Trainer is instantiated using the loaded model and the updated training arguments. This allows the training to resume seamlessly from the previous checkpoint.
+##### Continuing Training:
+The training process resumes using trainer.train(), and the model continues to improve based on the remaining optimization steps.
+### Summary of Phases
+1. Initial Training: Starts the training from the beginning or a pre-trained state, using well-defined training arguments and datasets.
+2. Continue Training: Resumes training from a checkpoint, allowing incremental improvements to the model while saving time and resources.
+
+Both phases allow for flexibility, letting the model evolve through initial training and further refinement through continued training. This iterative approach helps achieve better performance over time while utilizing pre-existing model checkpoints.
