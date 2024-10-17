@@ -235,3 +235,6 @@ Description: This topic highlights law enforcement and public safety, as indicat
 <b>Conclusion:</b>
 These five topics reflect a wide array of subjects covered in the dataset, ranging from general news and societal issues to region-specific events in Jakarta and Aceh, as well as law enforcement. By identifying the top words in each topic, the model can be fine-tuned to generate concise summaries that maintain the essence of these diverse news articles. This topic modeling process ensures that the summarizer captures key themes and context, producing coherent and relevant outputs across different categories of news.
 Each step in the EDA process provides a clearer understanding of the dataset's structure, informing the development and fine-tuning of the Bert2GPT Indonesian Text Summarizer. These insights ensure the model can generate concise, coherent, and contextually accurate summaries across a broad range of news topics.
+
+
+## Data Preprocessing
