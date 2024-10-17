@@ -192,10 +192,28 @@ The Sentiment Analysis for Articles provides an overview of the sentiment polari
 The dataset is overwhelmingly neutral, with 80.59% of the articles falling into this category. This suggests that the news articles typically provide factual reporting rather than subjective or opinionated content. A relatively small proportion of articles carry a positive or negative tone, which is important to note when training models for sentiment analysis. The slight positive skew in the dataset's mean (0.022) indicates that there are more positive articles than negative ones overall.
 
 
-13. Sentiment Analysis for Summaries
+#### 12. Sentiment Analysis for Summaries
 Extending sentiment analysis to the summaries ensures that the generated summaries preserve the sentiment of the original articles. This step is important for maintaining the integrity and emotional tone of the content.
+![image12](https://github.com/user-attachments/assets/4a7b1942-dd1f-49a4-a1b6-c99e35181219)
+The histogram shows a significant peak at a sentiment polarity of 0, reflecting the overwhelming majority of neutral summaries. A very small portion of summaries shows positive or negative sentiment, with only slight deviations from neutrality.
+The Sentiment Analysis for Summaries gives an overview of the sentiment polarity in the summaries of the news articles. Here are the key results:
+1. Statistical Overview:
+    1a. Total Summaries Analyzed: 204,855
+    1b. Mean Sentiment Score: 0.006953, indicating that overall sentiment in the summaries is very close to neutral.
+    1c. Standard Deviation: 0.063, showing low variability in sentiment scores.
+    1d. Minimum Score: -1.0 (extremely negative sentiment)
+    1e. Maximum Score: 1.0 (extremely positive sentiment)
+    1f. Median Sentiment Score: 0.0 (most summaries are neutral)
+2. Sentiment Distribution:
+    2a. Positive Sentiment: 3.55% of the summaries have a positive sentiment score.
+    2b. Negative Sentiment: 0.93% of the summaries exhibit negative sentiment.
+    2c. Neutral Sentiment: The vast majority of the summaries (95.51%) are neutral in tone.
 
-14. Top Words in Topics
+<b>Conclusion:</b>
+The sentiment analysis of summaries reveals that nearly all the summaries are neutral, with 95.51% having a sentiment score around 0. This indicates that the summarization process retains a factual and neutral tone, similar to the articles themselves. With such a small portion of summaries carrying a positive or negative sentiment, the dataset is primarily focused on delivering objective news information rather than opinionated or emotionally charged content. This neutrality is important for maintaining the integrity of news reporting in the summarization process.
+
+
+#### 13. Top Words in Topics
 Topic modeling, such as Latent Dirichlet Allocation (LDA), is used to uncover the main themes and topics within the dataset. By identifying the top words in various topics, we can understand the content diversity and ensure the model is well-tuned to represent the range of subjects present in the news articles.
 
 Topic 1: yang, dan, ini, dari, itu, dengan, untuk, aceh, dalam, ke
