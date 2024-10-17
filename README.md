@@ -142,8 +142,7 @@ The Top Bi-grams in Summaries show the most frequently occurring pairs of words 
 The frequent bi-grams in the summaries provide a condensed focus on important aspects such as location, healthcare, incidents, and time-sensitive events. These bi-grams reflect the core details summarized from the articles, highlighting key elements such as where, when, and what occurred, which is critical for concise news reporting. This pattern helps the model understand which content is essential for summarization and improves its ability to generate relevant and meaningful summaries.
 
 
-
-9. Plotting Tri-grams in Articles
+#### 9. Plotting Tri-grams in Articles
 The tri-gram analysis focuses on frequent three-word sequences in the articles. By identifying these tri-grams, we gain deeper insights into contextual word relationships, which can help the model generate more accurate and coherent summaries.
 ![image9](https://github.com/user-attachments/assets/1988a9bf-3f4e-4aa3-bbe3-b6af6de28f8a)
 The Top Tri-grams in Articles analysis highlights the most frequent three-word combinations (tri-grams) found in the articles. Here’s a summary of the key results:
