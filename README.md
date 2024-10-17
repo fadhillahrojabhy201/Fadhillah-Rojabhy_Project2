@@ -387,3 +387,40 @@ The training process resumes using trainer.train(), and the model continues to i
 2. Continue Training: Resumes training from a checkpoint, allowing incremental improvements to the model while saving time and resources.
 
 Both phases allow for flexibility, letting the model evolve through initial training and further refinement through continued training. This iterative approach helps achieve better performance over time while utilizing pre-existing model checkpoints.
+
+## Evaluate Model
+The model evaluation process consists of two key components: tracking the training progress via loss graphs and measuring the model's performance using ROUGE scores. 
+
+### Training and Validation Losses
+![image13](https://github.com/user-attachments/assets/412376aa-1367-4e49-b4da-90d1cdd70c89)
+
+<b>What it shows:</b> The graph plots the training loss and validation loss against the number of training steps.
+
+    1. Training loss: This reflects how well the model is learning from the training dataset.
+    2. Validation loss: This measures the model’s performance on a separate validation dataset to avoid overfitting.
+    
+<b>Trend:</b> As training progresses, both the training and validation losses decrease, indicating that the model is improving. The difference between the two also indicates whether the model generalizes well or overfits.
+
+### ROUGE Scores
+<b>What ROUGE is:</b>  ROUGE (Recall-Oriented Understudy for Gisting Evaluation) is a set of metrics used to evaluate the quality of summaries by comparing them to reference summaries. The key metrics are:
+
+ROUGE-1: Measures the overlap of unigrams (single words) between the generated summary and the reference summary.
+
+ROUGE-2: Measures the overlap of bigrams (pairs of consecutive words) between the generated and reference summaries.
+
+ROUGE-L: Focuses on the longest common subsequence between the generated and reference summaries.
+
+
+<b>What the graph shows:</b> The bar chart presents the model’s performance on ROUGE-1, ROUGE-2, and ROUGE-L scores. Each metric is broken down into:
+
+    - Recall: Measures how much of the reference summary’s content is captured in the generated summary.
+    - Precision: Measures how much of the generated summary’s content is relevant compared to the reference.
+    - F1 Score: A balanced metric combining both recall and precision.
+
+
+### Model’s Performance:
+    1. ROUGE-1 has a high recall score (~0.675), meaning that the generated summaries capture a significant portion of the content from the reference summaries. However, the precision (~0.212) and F1 score (~0.322) are lower, indicating that while the summaries include important parts of the text, they may also contain irrelevant or unnecessary information.
+    2. ROUGE-2 shows lower recall, precision, and F1 scores, which is expected because bigrams (word pairs) are harder to match exactly.
+    3. ROUGE-L performs similarly to ROUGE-1, suggesting the model captures important sentence structures and sequences in the summaries.
+
+The evaluation results show that the Bert2GPT Indonesian Text Summarizer effectively generates relevant summaries, as evidenced by the decreasing training and validation losses and reasonable ROUGE scores. While the model performs well in terms of recall, it has room for improvement in precision, which would help generate more concise and relevant summaries.
