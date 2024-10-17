@@ -1,4 +1,4 @@
-# Automated Text Summarization Using BERT: A Case Study on Indonesian News Articles with the Liputan6 Dataset
+![image10](https://github.com/user-attachments/assets/9fc6ca88-7f2d-43d6-adba-fe737bcf0b1c)# Automated Text Summarization Using BERT: A Case Study on Indonesian News Articles with the Liputan6 Dataset
 
 ## Introduction
 Text Summarization is a computational technique designed to condense lengthy documents into concise summaries while retaining the most important information. This method helps streamline the process of extracting key insights from large volumes of text, saving time and effort for individuals who need to quickly comprehend important documents. The advancement of natural language processing (NLP) techniques, such as transformer models like BERT, has significantly improved the accuracy and efficiency of automated summarization systems.
@@ -156,11 +156,40 @@ The Top Tri-grams in Articles analysis highlights the most frequent three-word c
 The tri-grams reflect a mix of content related to news reporting from Liputan6, healthcare, political figures, and regions in Indonesia. These frequent phrases show the importance of events and figures in the Indonesian political and healthcare landscapes, which are often covered in the news. Understanding these frequent tri-grams helps in building better summarization models, as they indicate recurring themes and content that should be highlighted in summaries.
 
 
-10. Plotting Tri-grams in Summaries
+#### 10. Plotting Tri-grams in Summaries
 As with the articles, tri-gram analysis is applied to the summaries to understand which three-word phrases are most commonly retained in the summarization process. This informs the model on how to reproduce important multi-word phrases that carry significant meaning.
+![image10](https://github.com/user-attachments/assets/6d00cbcc-2c48-4140-9e71-17bea32ce0a5)
+The Top Tri-grams in Summaries analysis identifies the most frequent three-word combinations in the summaries of news articles. Here’s a summary of the key results:
+1. Political Figures: The most frequent tri-gram, susilo bambang yudhoyono, refers to the former Indonesian president, showing the significant focus on political figures in news summaries. Presiden susilo bambang and presiden megawati sukarnoputri (another former president) further emphasize the focus on politics.
+2. Healthcare Terms: Di rumah sakit (in the hospital) is one of the most common tri-grams, indicating frequent coverage of healthcare topics or incidents involving hospitals.
+3. Protests and Incidents: Berunjuk rasa di (protest at/in) and ada korban jiwa (there were fatalities) suggest that the news often covers protests and incidents with significant consequences.
+4. Economic and Fuel Issues: Bahan bakar minyak (fuel oil) and kenaikan harga bbm (increase in fuel prices) point to coverage of economic issues, particularly fuel prices.
+5. Sports Figures: Sir alex ferguson appears in the top tri-grams, indicating coverage of international sports, particularly related to football.
 
-11. Sentiment Analysis for Articles
+<b>Conclusion:</b>
+The frequent tri-grams in summaries reflect a strong focus on political figures, healthcare incidents, protests, and economic issues. These tri-grams show the core topics that are often highlighted in news summaries, which helps to direct the summarization model's attention towards important events, figures, and topics.
+
+
+#### 11. Sentiment Analysis for Articles
 Sentiment analysis is conducted on the original articles to determine the overall emotional tone and sentiment polarity (positive, negative, or neutral). Understanding the sentiment of the articles helps ensure that the summarization process maintains the original emotional context and tone.
+![image11](https://github.com/user-attachments/assets/f3fde216-e379-41e2-a267-06b7be064378)
+The histogram shows a significant spike at a sentiment polarity of 0, which corresponds to the high proportion of neutral articles. A smaller distribution is observed for both positive and negative sentiments, with very few articles showing strong sentiment in either direction (extreme values like -1.0 or 1.0).
+The Sentiment Analysis for Articles provides an overview of the sentiment polarity in the news articles. Here are the key results:
+1. Statistical Overview:
+    1a. Total Articles Analyzed: 204,855
+    1b. Mean Sentiment Score: 0.022, indicating that the overall sentiment leans slightly positive.
+    1c. Standard Deviation: 0.120, showing low variability in sentiment scores across articles.
+    1d. Minimum Score: -1.0 (indicating extremely negative sentiment)
+    1e. Maximum Score: 1.0 (indicating extremely positive sentiment)
+    1f. Median Sentiment Score: 0.0 (the majority of articles are neutral)
+2. Sentiment Distribution:
+    2a. Positive Sentiment: 14.60% of the articles have positive sentiment scores.
+    2b. Negative Sentiment: 4.81% of the articles are classified as having negative sentiment.
+    2c. Neutral Sentiment: The majority of the articles (80.59%) are neutral, with a sentiment score close to 0.
+
+<b>Conclusion:</b>
+The dataset is overwhelmingly neutral, with 80.59% of the articles falling into this category. This suggests that the news articles typically provide factual reporting rather than subjective or opinionated content. A relatively small proportion of articles carry a positive or negative tone, which is important to note when training models for sentiment analysis. The slight positive skew in the dataset's mean (0.022) indicates that there are more positive articles than negative ones overall.
+
 
 13. Sentiment Analysis for Summaries
 Extending sentiment analysis to the summaries ensures that the generated summaries preserve the sentiment of the original articles. This step is important for maintaining the integrity and emotional tone of the content.
