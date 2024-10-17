@@ -313,5 +313,43 @@ First Element of Validation Dataset: {'id': '147664', 'url': 'https://www.liputa
 ```
 These preprocessed examples are critical for model training, ensuring that both the training and validation datasets are ready for optimal learning and inference.
 
+## Load Pre-trained Model
+The process of loading pre-trained models is a crucial step in setting up the Bert2GPT Indonesian Text Summarizer, which uses the established weights and configurations of BERT and GPT-2. These models serve as the encoder and decoder, respectively, in a sequence-to-sequence architecture.
+### 1. Loading the Pre-trained BERT Model
+The summarization model uses a specific pre-trained BERT model called "cahya/bert-base-indonesian-1.5G".
+BERT acts as the encoder, designed to understand and process the input text. Since this BERT model is pre-trained on Indonesian language data, it's well-suited for comprehending the context and linguistic features of Indonesian texts.
+In this step, BERT reads and encodes the input articles, generating contextual embeddings—representations of the text’s meaning and structure, which are used in the summarization process.
+### 2. Loading the Pre-trained GPT-2 Model
+The second step involves loading the GPT-2 model, specifically "cahya/gpt2-small-indonesian-522M".
+GPT-2 is used as the decoder in this architecture. However, to make it work effectively in this summarization task, it needs to be modified to enable cross-attention. This means GPT-2 can now focus on the encoded information from the BERT model.
+After receiving the encoded input from BERT, GPT-2 generates the actual summary. It ensures that the output is not only grammatically fluent but also aligned with the meaning and context of the original article.
+### Why This Approach Works
+By combining the pre-trained BERT and GPT-2 models, this summarizer leverages their strengths:
 
+1. BERT excels at understanding context and capturing the deep nuances of the Indonesian language.
+2. GPT-2 specializes in generating text that is coherent and fluent.
 
+This setup significantly enhances the model's ability to generate accurate and meaningful summaries while saving time and resources, as the pre-trained models reduce the need for building and training the system from scratch.
+
+## Create Model
+The process of creating the Bert2GPT Indonesian Text Summarizer involves carefully setting up the architecture that integrates pre-trained BERT and GPT-2 models into an encoder-decoder framework. Here’s an explanation of each step based on the code and process you've outlined:
+
+### 1. Create the GPT-2 Model with Modified Configuration
+The GPT-2 model is initialized with a configuration that allows cross-attention. This ensures that the GPT-2 decoder can attend to the output from the BERT encoder.
+Cross-attention enables the decoder to focus on relevant parts of the encoded input text, making the summarization process more accurate and context-aware.
+### 2. Combine BERT and GPT-2 into an Encoder-Decoder Model
+The BERT model is the encoder, and the GPT-2 model is the decoder in this architecture. The encoder reads the input text, converts it into a meaningful representation (encoded data), and then passes this representation to the GPT-2 decoder.
+The decoder then generates a summary based on the encoded input. This sequence-to-sequence structure is typical for tasks like summarization.
+### 3. Update Special Tokens Based on the Tokenizer
+Special tokens such as the decoder start token, pad token, and end-of-sequence (EOS) token are essential for the model to understand where a sequence begins and ends.
+These tokens are crucial during training and inference, ensuring the model handles inputs of varying lengths correctly.
+### 4. Check for GPU Availability
+GPU availability is checked to determine whether the model can be trained on a GPU, which would significantly speed up training.
+If a GPU is available, the model is moved to the GPU for faster computation. Otherwise, it will default to the CPU, which might take longer for training but is still functional.
+### 5. Move the Model to the Appropriate Device
+Once the device (GPU or CPU) is determined, the model is moved to that device to ensure it's ready for training.
+### 6. Print Model Architecture and Parameters
+The code prints the architecture of the model to give a clear overview of how the components are structured.
+Additionally, it calculates the total number of parameters and the trainable parameters in the model. This information is helpful to understand the model's complexity and its trainable components.
+### Summary
+The steps taken in this process ensure that the Bert2GPT Indonesian Text Summarizer is effectively prepared for training. By integrating pre-trained BERT and GPT-2 models and configuring special tokens, the model leverages advanced language understanding and text generation capabilities. Checking GPU availability helps optimize the training process for faster results, and understanding the model’s parameters gives insight into its complexity.
