@@ -1,4 +1,4 @@
-<img width="1017" alt="Screen Shot 2024-10-19 at 12 24 17" src="https://github.com/user-attachments/assets/4e173bb6-4d7a-4d93-bc03-23e1bbf9b42b"># Automated Text Summarization Using BERT: A Case Study on Indonesian News Articles with the Liputan6 Dataset
+# Automated Text Summarization Using BERT: A Case Study on Indonesian News Articles with the Liputan6 Dataset
 
 ## Introduction
 Text Summarization is a computational technique designed to condense lengthy documents into concise summaries while retaining the most important information. This method helps streamline the process of extracting key insights from large volumes of text, saving time and effort for individuals who need to quickly comprehend important documents. The advancement of natural language processing (NLP) techniques, such as transformer models like BERT, has significantly improved the accuracy and efficiency of automated summarization systems.
@@ -49,20 +49,86 @@ The id_liputan6 dataset is divided into two main subsets:
 ## Methodology
 ### Exploratory Data Analysis (EDA)
 The Exploratory Data Analysis (EDA) phase is critical in understanding the dataset's underlying patterns, structure, and characteristics. In this project, EDA offers insights into the id_liputan6 dataset, guiding the development and fine-tuning of the Bert2GPT Indonesian Text Summarizer. The following analytical steps were taken to provide a comprehensive understanding of the dataset:
-#### 1. Distribution of Article Lengths
+#### 1. Data Cleaning, Summary and Insights
+
+1. Text Cleaning: The examples show that the cleaning process is working effectively:
+- Lowercase conversion is applied.
+- "Liputan6.com" and location prefixes are removed.
+- Special characters are removed.
+- Excess spaces are trimmed.
+
+2. Article and Summary Statistics:
+        a. Cleaned Article Statistics:
+                - Average length: 181.524 words
+                - Maximum length: 1064 words
+                - Minimum length: 68 words
+        b. Cleaned Summary Statistics:
+                - Average length: 23.127 words
+                - Maximum length: 37 words
+                - Minimum length: 13 words
+           Insights:
+                - There's a significant difference between article and summary lengths.
+                - The compression ratio is about 7.8:1 (181.524 / 23.127), meaning summaries are typically about 12.7% the length of the original articles.
+                - Articles have a wide range of lengths (68 to 1064 words), which might require attention during model training.
+                - Summaries are more consistent in length (13 to 37 words), which is good for generating predictions.
+
+3. Word Frequency Analysis: Top words in articles: di, yang, dan, itu, ini, jakarta, dari, untuk, dengan, dalam Top words in summaries: di, dan, yang, akan, tak, harga, untuk, pemerintah, dari, sejumlah
+Insights:
+- Common words like "di" (in), "yang" (which/that), and "dan" (and) are frequent in both articles and summaries.
+- "Jakarta" appears frequently in articles but not in the top 10 for summaries, suggesting many articles are about events in the capital.
+- "Harga" (price) and "pemerintah" (government) are in the top 10 for summaries but not articles, indicating these might be key topics often highlighted in summaries.
+- "Akan" (will) is more common in summaries, possibly indicating a focus on future events or consequences.
+
+#### 2. Text Preprocessing
+The preprocessing step seems to have worked, but there are a few observations:
+
+- The lemmatization doesn't appear to be working as expected for Indonesian. This is likely because NLTK's WordNetLemmatizer is designed for English.
+
+- Stop words are being removed, but some common words (like "yang", "di", "dan") are still present. This suggests that the Indonesian stop words list might not be comprehensive.
+
+- Punctuation marks are still present in the processed text. You might want to remove these in a future iteration.
+<img width="1440" alt="Screen Shot 2024-10-19 at 12 59 20" src="https://github.com/user-attachments/assets/620733ab-ed1e-4070-8987-4a09d5ee5295">
+
+- Word Cloud Visualization: Create word clouds for both original and processed texts to visually compare the most prominent words.
+
+![image3](https://github.com/user-attachments/assets/3520bb4f-a929-427d-9e27-175469c05abf)
+
+![image4](https://github.com/user-attachments/assets/f3d5acfa-979f-4838-bfe6-129403f304b7)
+
+
+- Unique Words Count: Compare the number of unique words in the original and processed datasets to see how much the vocabulary has been reduced.
+          a. Original article vocabulary size: 612672
+          b. Processed article vocabulary size: 300207
+          c. Original summary vocabulary size: 172071
+          d. Processed summary vocabulary size: 96690
+
+- Top words in LDA topics:
+Topic 1: presiden, jakarta, partai, indonesia, ketua, liputan6, anggota, com, baca, pemerintah
+Topic 2: pemain, tim, musim, pertandingan, gol, klub, menit, liga, babak, bermain
+Topic 3: rp, jakarta, harga, com, liputan6, pemerintah, indonesia, minyak, dana, pt
+Topic 4: anak, jakarta, com, orang, liputan6, indonesia, dunia, sang, acara, mengaku
+Topic 5: warga, polisi, rumah, com, liputan6, korban, jakarta, jalan, jawa, kota
+
+- New compression ratio: 0.14
+
+#### 3. Distribution of Article Lengths
 This step examines the lengths of articles to understand the overall distribution within the dataset. By plotting a histogram, we can observe variations in article length and detect potential outliers or biases in the data. This analysis helps determine if certain article lengths dominate the dataset, which may impact the model’s performance.
-![image1](https://github.com/user-attachments/assets/ca8dd9e7-7171-4769-aa2f-b750c1aadf48)
+
+![image1](https://github.com/user-attachments/assets/e576d9dd-14ff-4d7c-b5f2-ea3f805c4d0b)
+
 The Distribution of Article Lengths in the dataset reveals that the majority of articles are relatively short, with 34.43% of them having fewer than 1,000 characters. The mean article length is approximately 1,407 characters, with a median of 1,185 characters, indicating that most articles fall between 896 and 1,661 characters. There are a few outliers, with 0.04% of articles exceeding 10,000 characters, creating a strong positive skew (4.42) and high kurtosis (72.91). This skewness suggests that while most articles are concise, there are rare but significant outliers that are much longer.
 These findings highlight the importance of training the summarization model to handle a wide range of article lengths, from very short to exceptionally long.
 
-#### 2. Distribution of Summary Lengths
+#### 4. Distribution of Summary Lengths
 Similarly, I analyze the distribution of summary lengths to understand the patterns in the summarization process. This step is essential to ensure that the generated summaries are concise while still retaining key information. A histogram is used to visualize how summary lengths vary, aiding in fine-tuning the model to produce balanced and informative summaries.
-![image2](https://github.com/user-attachments/assets/1d920f98-821c-4753-8b07-8dab6ef77399)
+
+![image2](https://github.com/user-attachments/assets/b839da53-c317-4d06-a46b-0770ab90cad5)
+
 The histogram shows a relatively normal distribution, with a peak around 170-210 characters, indicating that most summaries are concise and fall within a tight range. The curve tails off sharply after 300 characters, indicating that very long summaries are rare.
 The dataset is consistent in terms of summary lengths, with most summaries being short and informative. The distribution's tight range suggests that the model will focus on generating concise summaries around 190 characters, with minimal outliers or extreme summary lengths. This information is important for training the model to generate summaries that are concise, aligned with the dataset, and relevant.
 
 
-#### 3. Most Frequent Terms in Articles
+#### 5. Most Frequent Terms in Articles
 This step identifies the most frequent terms in the original articles. By visualizing these terms through a bar plot, we gain insight into the common themes and topics that dominate the dataset. This information helps in understanding the general context of the articles and aligning the model to prioritize relevant terms during summarization.
 ![image3](https://github.com/user-attachments/assets/e7de7f3a-29e3-4fbf-84d7-79e697b96bfb)
 <b>Top 5 Terms:</b>
@@ -81,7 +147,7 @@ Negations and Context Words: Words like tidak (no/not) and tak (not) also appear
 Some thematic terms reflect common subjects in news articles, such as warga (citizens), menjadi (become), and para (indicating plural people, like citizens or officials).
 This frequency distribution highlights the need for the summarization model to focus less on these common function words and more on terms that carry significant meaning, such as names, events, or specific actions, when generating summaries. This can help ensure that the summaries are more informative and less dominated by non-essential words.
 
-#### 4. Most Frequent Terms in Summaries
+#### 6. Most Frequent Terms in Summaries
 This analysis mirrors the frequent term analysis for articles but focuses on the summaries. The frequent terms in the summaries provide insights into which parts of the articles are being prioritized in the summarization process. A bar plot is used to showcase the top terms, which help in refining the model to generate meaningful and focused summaries.
 ![image4](https://github.com/user-attachments/assets/6556c2b6-abab-41e2-a914-d7434ced4307)
 The analysis of the Most Frequent Terms in Summaries provides a view of the most common words used in the summaries of the articles. Below are the key insights based on the top 30 terms:
@@ -105,7 +171,7 @@ The summaries tend to condense the essence of the articles while retaining impor
 <b>Conclusion:</b>
 The frequent use of function words suggests that summaries retain key sentence structures similar to the articles. However, the inclusion of more meaningful content-specific terms like warga, rumah, and korban ensures that summaries focus on the core topics discussed in the articles. This is important for ensuring that the model generates summaries that are not only concise but also retain the most relevant content.
 
-#### 5. Scatter Plot for Article vs. Summary Length
+#### 7. Scatter Plot for Article vs. Summary Length
 A scatter plot is used to compare the lengths of the original articles and their corresponding summaries. This visualization provides an overview of the relationship between the article length and the compression ratio during summarization. It helps in analyzing how well the model balances between retaining information and reducing text length.
 ![image5](https://github.com/user-attachments/assets/df908f87-a7c8-46eb-b529-b6956ad81bbd)
 
@@ -123,7 +189,7 @@ Outliers: A few outliers represent extremely long articles (up to 40,000 charact
 The weak correlation and relatively consistent summary length suggest that the summarization process is effective in compressing information, regardless of the article's length. This ensures that even longer articles can be summarized concisely, while shorter articles are not overly truncated. The average compression ratio (0.17) further emphasizes that the summaries are succinct, reducing the article length significantly while retaining the core information.
 
 
-#### 6. Box Plot for Distribution of Text Lengths
+#### 8. Box Plot for Distribution of Text Lengths
 The box plot offers a visual representation of the variance and central tendencies in text lengths for both articles and summaries. This helps to understand the range of lengths the model will need to handle and ensures that outliers or excessively long articles do not skew the model's training.
 ![image6](https://github.com/user-attachments/assets/04524d59-ed1b-4f83-9f7a-fe297b88afe7)
 The Box Plot for Distribution of Text Lengths compares the lengths of articles and summaries, providing insights into the range and distribution of both text types. Here’s a summary of the key results:
@@ -134,7 +200,7 @@ b. Summary Lengths: The summary lengths have a tighter distribution, with most s
 The box plot clearly shows that summaries are significantly shorter than the original articles, with a more consistent length distribution. Articles have a wider range of lengths, with a few very long outliers, while summaries are typically concise and within a narrow range. This visual reinforces the fact that the summarization process reduces the text length significantly while keeping the content concise.
 
 
-#### 7. Plotting Bi-grams in Articles
+#### 9. Plotting Bi-grams in Articles
 Bi-grams, which are pairs of consecutive words, are plotted to reveal common phrase patterns in the articles. Analyzing bi-grams helps understand the contextual relationships between words and provides insights into frequently occurring phrases that the model can prioritize during summarization.
 ![image7](https://github.com/user-attachments/assets/df11b389-c019-4c13-b34a-0321be430aa6)
 The Top Bi-grams in Articles analysis shows the most frequently occurring pairs of words (bi-grams) in the articles.The Top Bi-grams in Articles analysis shows the most frequently occurring pairs of words (bi-grams) in the articles. Here’s a summary of the key results:
