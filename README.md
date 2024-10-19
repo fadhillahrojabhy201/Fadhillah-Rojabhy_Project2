@@ -112,20 +112,18 @@ Topic 5: warga, polisi, rumah, com, liputan6, korban, jakarta, jalan, jawa, kota
 - New compression ratio: 0.14
 
 #### 3. Distribution of Article Lengths
-This step examines the lengths of articles to understand the overall distribution within the dataset. By plotting a histogram, we can observe variations in article length and detect potential outliers or biases in the data. This analysis helps determine if certain article lengths dominate the dataset, which may impact the model’s performance.
+This step examines the lengths of processed articles to understand the overall distribution within the dataset. By plotting a histogram, we can observe variations in article length and detect potential outliers or biases in the data. This analysis helps determine if certain article lengths dominate the dataset, which may impact the model’s performance.
 
-![image1](https://github.com/user-attachments/assets/e576d9dd-14ff-4d7c-b5f2-ea3f805c4d0b)
+![image1](https://github.com/user-attachments/assets/750b3750-5cb4-4ed1-a05d-df700d8bb1e3)
 
-The Distribution of Article Lengths in the dataset reveals that the majority of articles are relatively short, with 34.43% of them having fewer than 1,000 characters. The mean article length is approximately 1,407 characters, with a median of 1,185 characters, indicating that most articles fall between 896 and 1,661 characters. There are a few outliers, with 0.04% of articles exceeding 10,000 characters, creating a strong positive skew (4.42) and high kurtosis (72.91). This skewness suggests that while most articles are concise, there are rare but significant outliers that are much longer.
-These findings highlight the importance of training the summarization model to handle a wide range of article lengths, from very short to exceptionally long.
+The distribution of article lengths indicates a significant concentration of shorter articles, with 34.43% having fewer than 1,000 characters. The mean article length is approximately 1,408 characters, while the median is 1,185 characters, suggesting that most articles fall within the range of 896 to 1,661 characters. The dataset reveals a minimum length of 231 characters and a maximum length of 47,222 characters, with 83 articles (0.04%) exceeding 10,000 characters. The skewness of 4.42 and kurtosis of 72.91 reflect a strong positive skew, indicating that while most articles are relatively concise, there are a few significant outliers that are considerably longer. These findings highlight the importance of training the summarization model to effectively handle a diverse range of article lengths, from very short to exceptionally long.
 
 #### 4. Distribution of Summary Lengths
 Similarly, I analyze the distribution of summary lengths to understand the patterns in the summarization process. This step is essential to ensure that the generated summaries are concise while still retaining key information. A histogram is used to visualize how summary lengths vary, aiding in fine-tuning the model to produce balanced and informative summaries.
 
-![image2](https://github.com/user-attachments/assets/b839da53-c317-4d06-a46b-0770ab90cad5)
+![image2](https://github.com/user-attachments/assets/1bf90b9e-df79-4b0c-8b42-11d3205b4bee)
 
-The histogram shows a relatively normal distribution, with a peak around 170-210 characters, indicating that most summaries are concise and fall within a tight range. The curve tails off sharply after 300 characters, indicating that very long summaries are rare.
-The dataset is consistent in terms of summary lengths, with most summaries being short and informative. The distribution's tight range suggests that the model will focus on generating concise summaries around 190 characters, with minimal outliers or extreme summary lengths. This information is important for training the model to generate summaries that are concise, aligned with the dataset, and relevant.
+The distribution of summary lengths shows that most summaries are brief, with a mean length of approximately 193 characters and a median of 191 characters. The majority of summaries fall within the range of 170 to 209 characters, with a minimum length of 60 characters and a maximum of 586 characters. Notably, there are no summaries exceeding 1,000 characters, while 1,003 summaries (0.49%) are shorter than 100 characters. The skewness of 2.22 and kurtosis of 13.87 indicate a moderate positive skew, suggesting that while most summaries are concise, there are a few longer ones. Overall, the tight range of summary lengths implies that the model can be effectively trained to generate concise summaries around 192 characters, ensuring alignment with the dataset's characteristics.
 
 
 #### 5. Most Frequent Terms in Articles
@@ -214,7 +212,7 @@ The Top Bi-grams in Articles analysis shows the most frequently occurring pairs 
 The most frequent bi-grams in the dataset reflect the recurring mention of the news outlet Liputan6, along with common geographical and time-related references. The frequent usage of healthcare terms and regional locations suggests coverage of health and regional events. These insights are useful for training the summarization model to recognize and prioritize key contextual information in the articles.
 
 
-#### 8. Plotting Bi-grams in Summaries
+#### 10. Plotting Bi-grams in Summaries
 Bi-gram analysis is extended to summaries to uncover the most common two-word sequences. This step helps in refining the model’s ability to capture and reproduce key phrases in the summaries that are crucial for maintaining coherence and context.
 ![image8](https://github.com/user-attachments/assets/21fd7f60-8109-44be-80ce-e3b974e987ba)
 The Top Bi-grams in Summaries show the most frequently occurring pairs of words in the summaries of the news articles. Here’s a summary of the key results:
@@ -228,7 +226,7 @@ The Top Bi-grams in Summaries show the most frequently occurring pairs of words 
 The frequent bi-grams in the summaries provide a condensed focus on important aspects such as location, healthcare, incidents, and time-sensitive events. These bi-grams reflect the core details summarized from the articles, highlighting key elements such as where, when, and what occurred, which is critical for concise news reporting. This pattern helps the model understand which content is essential for summarization and improves its ability to generate relevant and meaningful summaries.
 
 
-#### 9. Plotting Tri-grams in Articles
+#### 11. Plotting Tri-grams in Articles
 The tri-gram analysis focuses on frequent three-word sequences in the articles. By identifying these tri-grams, we gain deeper insights into contextual word relationships, which can help the model generate more accurate and coherent summaries.
 ![image9](https://github.com/user-attachments/assets/1988a9bf-3f4e-4aa3-bbe3-b6af6de28f8a)
 The Top Tri-grams in Articles analysis highlights the most frequent three-word combinations (tri-grams) found in the articles. Here’s a summary of the key results:
@@ -242,7 +240,7 @@ The Top Tri-grams in Articles analysis highlights the most frequent three-word c
 The tri-grams reflect a mix of content related to news reporting from Liputan6, healthcare, political figures, and regions in Indonesia. These frequent phrases show the importance of events and figures in the Indonesian political and healthcare landscapes, which are often covered in the news. Understanding these frequent tri-grams helps in building better summarization models, as they indicate recurring themes and content that should be highlighted in summaries.
 
 
-#### 10. Plotting Tri-grams in Summaries
+#### 12. Plotting Tri-grams in Summaries
 As with the articles, tri-gram analysis is applied to the summaries to understand which three-word phrases are most commonly retained in the summarization process. This informs the model on how to reproduce important multi-word phrases that carry significant meaning.
 ![image10](https://github.com/user-attachments/assets/6d00cbcc-2c48-4140-9e71-17bea32ce0a5)
 The Top Tri-grams in Summaries analysis identifies the most frequent three-word combinations in the summaries of news articles. Here’s a summary of the key results:
@@ -256,7 +254,7 @@ The Top Tri-grams in Summaries analysis identifies the most frequent three-word 
 The frequent tri-grams in summaries reflect a strong focus on political figures, healthcare incidents, protests, and economic issues. These tri-grams show the core topics that are often highlighted in news summaries, which helps to direct the summarization model's attention towards important events, figures, and topics.
 
 
-#### 11. Sentiment Analysis for Articles
+#### 13. Sentiment Analysis for Articles
 Sentiment analysis is conducted on the original articles to determine the overall emotional tone and sentiment polarity (positive, negative, or neutral). Understanding the sentiment of the articles helps ensure that the summarization process maintains the original emotional context and tone.
 
 ![image11](https://github.com/user-attachments/assets/f3fde216-e379-41e2-a267-06b7be064378)
@@ -278,7 +276,7 @@ The Sentiment Analysis for Articles provides an overview of the sentiment polari
 The dataset is overwhelmingly neutral, with 80.59% of the articles falling into this category. This suggests that the news articles typically provide factual reporting rather than subjective or opinionated content. A relatively small proportion of articles carry a positive or negative tone, which is important to note when training models for sentiment analysis. The slight positive skew in the dataset's mean (0.022) indicates that there are more positive articles than negative ones overall.
 
 
-#### 12. Sentiment Analysis for Summaries
+#### 14. Sentiment Analysis for Summaries
 Extending sentiment analysis to the summaries ensures that the generated summaries preserve the sentiment of the original articles. This step is important for maintaining the integrity and emotional tone of the content.
 ![image12](https://github.com/user-attachments/assets/4a7b1942-dd1f-49a4-a1b6-c99e35181219)
 The histogram shows a significant peak at a sentiment polarity of 0, reflecting the overwhelming majority of neutral summaries. A very small portion of summaries shows positive or negative sentiment, with only slight deviations from neutrality.
@@ -299,7 +297,7 @@ The Sentiment Analysis for Summaries gives an overview of the sentiment polarity
 The sentiment analysis of summaries reveals that nearly all the summaries are neutral, with 95.51% having a sentiment score around 0. This indicates that the summarization process retains a factual and neutral tone, similar to the articles themselves. With such a small portion of summaries carrying a positive or negative sentiment, the dataset is primarily focused on delivering objective news information rather than opinionated or emotionally charged content. This neutrality is important for maintaining the integrity of news reporting in the summarization process.
 
 
-#### 13. Top Words in Topics
+#### 15. Top Words in Topics
 Topic modeling, such as Latent Dirichlet Allocation (LDA), is used to uncover the main themes and topics within the dataset. By identifying the top words in various topics, we can understand the content diversity and ensure the model is well-tuned to represent the range of subjects present in the news articles.
 Here are the top words found in the five key topics:
 Topic 1:
@@ -325,15 +323,21 @@ Each step in the EDA process provides a clearer understanding of the dataset's s
 
 ## Data Preprocessing
 ### 1. Splitting the Dataset
-The dataset is divided into training (155,106 examples) and validation (38,777 examples) sets. This separation ensures the model can be evaluated on unseen data for better generalization.
+The dataset is divided into training (79,413 examples) and validation (19,854 examples) sets. This separation ensures the model can be evaluated on unseen data for better generalization.
 ### 2. Loading the Tokenizer from a Pretrained Model
 The tokenizer from the pretrained model "cahya/bert2gpt-indonesian-summarization" is employed, with special tokens for marking the start and end of sequences.
+
+<img width="1081" alt="Screen Shot 2024-10-19 at 14 52 04" src="https://github.com/user-attachments/assets/711fd77a-0222-4d32-b15e-be37327ce7db">
+
 ### 3. Defining the Maximum Length of the Input and Target Sequences
 Both the input (articles) and target (summaries) sequences are limited to a maximum length of 256 tokens for efficient batching and uniformity.
 ### 4. Tokenizing and Encoding Articles and Summaries
 A preprocessing function tokenizes and encodes the articles and summaries, ensuring they are padded or truncated to the specified length.
 ### 5. Mapping Train and Validation Dataset
 The preprocessing function is applied to both the training and validation sets, resulting in tokenized, encoded, and structured datasets with input IDs, attention masks, and decoder input IDs ready for model input.
+
+<img width="1394" alt="Screen Shot 2024-10-19 at 14 55 31" src="https://github.com/user-attachments/assets/12185c96-a6e0-492c-bc3e-59566f7e96f9">
+
 ### 6. Processed Example
 For verification, processed examples from both datasets (training and validation datasets) are printed, showcasing the encoded values (input_ids, attention_mask, labels, decoder_input_ids).
 #### Print Processed Examples from the Training Dataset
@@ -384,10 +388,10 @@ decoder_input_ids: [3, 3, 7797, 6237, 3028, 2861, 3154, 6421, 4107, 1495, 1891, 
 #### Printing the Length of Training and Validation Datasets
 The lengths of the training and validation datasets give us an overview of the dataset size and the number of examples available for model training and validation:
 
-1. Length of Training Dataset: 155,106 examples.
-2. Length of Validation Dataset: 38,777 examples.
+1. Length of Training Dataset: 79,413 examples.
+2. Length of Validation Dataset: 19,854 examples.
 
-This indicates that the training dataset consists of 155,106 data points, which are used to train the machine learning model, while the validation dataset contains 38,777 data points, which are used to evaluate the model's performance during the training process.
+This indicates that the training dataset consists of 79,413 data points, which are used to train the machine learning model, while the validation dataset contains 19,854 data points, which are used to evaluate the model's performance during the training process.
 
 These dataset sizes reflect the amount of data available for learning patterns (training) and for assessing generalization (validation).
 
