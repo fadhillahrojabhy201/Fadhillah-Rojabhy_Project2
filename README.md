@@ -23,10 +23,15 @@ Each record in the dataset contains the following fields:
 The project relies on the id_liputan6 dataset, which is available on the Hugging Face platform. This dataset, specifically curated from Liputan6 — a major Indonesian news source — provides rich text-summarization pairs. These pairs are crucial for training models that can perform text summarization in the Indonesian language.
 The id_liputan6 dataset is divided into two main subsets:
 
+<img width="1077" alt="Screen Shot 2024-10-19 at 12 17 07" src="https://github.com/user-attachments/assets/1bcaff02-0644-4a59-ac16-8794f61405d3">
+
 1. Xtreme Set:
         a. Designed for challenging summarization tasks
         b. Contains diverse article lengths and complexities
         c. Used to test model robustness in complex scenarios
+
+<img width="1091" alt="Screen Shot 2024-10-19 at 12 16 54" src="https://github.com/user-attachments/assets/31e2cd0f-59ef-40b0-bbf9-6013a0b0d5cb">
+
 2. Canonical Set:
         a. Primary dataset for training and benchmarking
         b. Larger collection of news articles and summaries
