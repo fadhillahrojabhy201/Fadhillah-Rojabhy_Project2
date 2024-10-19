@@ -1,4 +1,4 @@
-# Automated Text Summarization Using BERT: A Case Study on Indonesian News Articles with the Liputan6 Dataset
+<img width="1017" alt="Screen Shot 2024-10-19 at 12 24 17" src="https://github.com/user-attachments/assets/4e173bb6-4d7a-4d93-bc03-23e1bbf9b42b"># Automated Text Summarization Using BERT: A Case Study on Indonesian News Articles with the Liputan6 Dataset
 
 ## Introduction
 Text Summarization is a computational technique designed to condense lengthy documents into concise summaries while retaining the most important information. This method helps streamline the process of extracting key insights from large volumes of text, saving time and effort for individuals who need to quickly comprehend important documents. The advancement of natural language processing (NLP) techniques, such as transformer models like BERT, has significantly improved the accuracy and efficiency of automated summarization systems.
@@ -23,14 +23,12 @@ Each record in the dataset contains the following fields:
 The project relies on the id_liputan6 dataset, which is available on the Hugging Face platform. This dataset, specifically curated from Liputan6 — a major Indonesian news source — provides rich text-summarization pairs. These pairs are crucial for training models that can perform text summarization in the Indonesian language.
 The id_liputan6 dataset is divided into two main subsets:
 
-<img width="1077" alt="Screen Shot 2024-10-19 at 12 17 07" src="https://github.com/user-attachments/assets/1bcaff02-0644-4a59-ac16-8794f61405d3">
-
 1. Xtreme Set:
         a. Designed for challenging summarization tasks
         b. Contains diverse article lengths and complexities
         c. Used to test model robustness in complex scenarios
 
-<img width="1091" alt="Screen Shot 2024-10-19 at 12 16 54" src="https://github.com/user-attachments/assets/31e2cd0f-59ef-40b0-bbf9-6013a0b0d5cb">
+<img width="1077" alt="Screen Shot 2024-10-19 at 12 17 07" src="https://github.com/user-attachments/assets/1bcaff02-0644-4a59-ac16-8794f61405d3">
 
 2. Canonical Set:
         a. Primary dataset for training and benchmarking
@@ -38,6 +36,8 @@ The id_liputan6 dataset is divided into two main subsets:
         c. Balanced representation of various categories (politics, entertainment, sports, etc.)
         d. Reflects diversity of mainstream Indonesian news reporting
         e. Covers a comprehensive range of topics and writing styles
+
+<img width="1017" alt="Screen Shot 2024-10-19 at 12 24 17" src="https://github.com/user-attachments/assets/62ea647d-0b2f-4d32-ad0e-e826e260f880">
 
 ### Importance for the Project
 - The Canonical Subset is used for fine-tuning the Bert2GPT model
