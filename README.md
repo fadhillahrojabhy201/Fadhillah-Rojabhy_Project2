@@ -9,22 +9,37 @@ In this project, we aim to develop an automated text summarization system using 
 The primary objective of this project is to experiment with a BERT-based model to perform text summarization on a dataset of news articles. The system will automatically generate concise summaries of the original text, maintaining the essential information while significantly reducing the text length. 
 
 ## Dataset
-The dataset utilized in this project is the Liputan6 Dataset, which comprises a collection of Indonesian news articles sourced from the Liputan6 website. This dataset serves as the core resource for training and evaluating text summarization models. Each record in the dataset is structured with the following fields:
+### Dataset Description
+The Liputan6 Dataset is a collection of Indonesian news articles sourced from the Liputan6 website. It serves as the primary resource for training and evaluating text summarization models in the Indonesian language.
+### Record Structure
+Each record in the dataset contains the following fields:
 1. id: A unique identifier for each article.
 2. url: The web link to the news article.
 3. clean_article: The full content of the news article, which has been preprocessed to remove unnecessary elements such as advertisements or formatting tags.
 4. clean_summary: An abstractive summary of the article, generated either manually or automatically.
 5. extractive_summary: Index-based extractive summaries, which highlight key sentences from the original text.
 
+### Dataset Subsets
 The project relies on the id_liputan6 dataset, which is available on the Hugging Face platform. This dataset, specifically curated from Liputan6 — a major Indonesian news source — provides rich text-summarization pairs. These pairs are crucial for training models that can perform text summarization in the Indonesian language.
-
 The id_liputan6 dataset is divided into two main subsets:
-1. Xtreme Set: This set is designed for challenging summarization tasks, containing a diverse range of article lengths and complexities. It pushes the limits of summarization models by requiring them to summarize intricate and longer articles. This set is used to test the robustness and capability of models in more complex scenarios.
-2. Canonical Set:
-    a. The canonical set serves as the primary dataset for training and benchmarking. It offers a larger collection of news articles and their summaries, providing a balanced representation of various categories such as politics, entertainment, and sports. This set is ideal for training general summarization models, as it reflects the diversity of mainstream Indonesian news reporting.
-    b. The Canonical Set covers a comprehensive range of topics and writing styles typical of Indonesian news, ensuring that the model is trained on a rich and varied corpus. This helps the model learn the nuances of the language and adapt to different contexts.
 
-By using the Canonical Subset, the Bert2GPT model is exposed to a wide variety of news content during the fine-tuning process. This ensures the model can accurately generate concise, coherent, and informative summaries that remain faithful to the original text. The choice of this subset is strategic, allowing the model to be highly relevant and applicable across different types of Indonesian news articles.
+1. Xtreme Set:
+        a. Designed for challenging summarization tasks
+        b. Contains diverse article lengths and complexities
+        c. Used to test model robustness in complex scenarios
+2. Canonical Set:
+        a. Primary dataset for training and benchmarking
+        b. Larger collection of news articles and summaries
+        c. Balanced representation of various categories (politics, entertainment, sports, etc.)
+        d. Reflects diversity of mainstream Indonesian news reporting
+        e. Covers a comprehensive range of topics and writing styles
+
+### Importance for the Project
+- The Canonical Subset is used for fine-tuning the Bert2GPT model
+- Exposes the model to a wide variety of news content
+- Ensures the model can generate accurate, concise, and coherent summaries
+- Allows the model to learn language nuances and adapt to different contexts
+- Makes the model highly relevant and applicable across different types of Indonesian news articles
 
 ## Methodology
 ### Exploratory Data Analysis (EDA)
