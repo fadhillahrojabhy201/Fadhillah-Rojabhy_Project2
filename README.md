@@ -49,13 +49,15 @@ The id_liputan6 dataset is divided into two main subsets:
 ## Methodology
 ### Exploratory Data Analysis (EDA)
 The Exploratory Data Analysis (EDA) phase is critical in understanding the dataset's underlying patterns, structure, and characteristics. In this project, EDA offers insights into the id_liputan6 dataset, guiding the development and fine-tuning of the Bert2GPT Indonesian Text Summarizer. The following analytical steps were taken to provide a comprehensive understanding of the dataset:
+
 #### 1. Data Cleaning, Summary and Insights
 
-1. Text Cleaning: The examples show that the cleaning process is working effectively:
-- Lowercase conversion is applied.
-- "Liputan6.com" and location prefixes are removed.
-- Special characters are removed.
-- Excess spaces are trimmed.
+
+1. Text Cleaning:  The cleaning process effectively prepares the text for analysis:
+- Lowercase Conversion: All text is converted to lowercase, ensuring uniformity.
+- Removal of Unwanted Text: Instances of "Liputan6.com," location prefixes, and specific text in parentheses or brackets are removed to focus on the core content.
+- Special Character Removal: Non-alphanumeric characters are eliminated, which simplifies the text and helps in further analysis.
+- Trimming Excess Spaces: Any extra spaces in the text are removed to maintain clean formatting.
 
 2. Article and Summary Statistics:
         a. Cleaned Article Statistics:
@@ -72,12 +74,15 @@ The Exploratory Data Analysis (EDA) phase is critical in understanding the datas
                 - Articles have a wide range of lengths (68 to 1064 words), which might require attention during model training.
                 - Summaries are more consistent in length (13 to 37 words), which is good for generating predictions.
 
-3. Word Frequency Analysis: Top words in articles: di, yang, dan, itu, ini, jakarta, dari, untuk, dengan, dalam Top words in summaries: di, dan, yang, akan, tak, harga, untuk, pemerintah, dari, sejumlah
-Insights:
-- Common words like "di" (in), "yang" (which/that), and "dan" (and) are frequent in both articles and summaries.
-- "Jakarta" appears frequently in articles but not in the top 10 for summaries, suggesting many articles are about events in the capital.
-- "Harga" (price) and "pemerintah" (government) are in the top 10 for summaries but not articles, indicating these might be key topics often highlighted in summaries.
-- "Akan" (will) is more common in summaries, possibly indicating a focus on future events or consequences.
+3. Word Frequency Analysis:
+Top Words in Cleaned Articles:
+`Most frequent words include: di, yang, dan, itu, ini, jakarta, dari, untuk, dengan, dalam.`
+Top Words in Cleaned Summaries:
+`Most frequent words include: di, dan, yang, akan, tak, harga, untuk, pemerintah, dari, sejumlah.`
+
+<img width="1336" alt="Screen Shot 2024-10-22 at 21 47 55" src="https://github.com/user-attachments/assets/caca3868-029c-4c4e-9b9c-e5f08cd64d6c">
+
+
 
 #### 2. Text Preprocessing
 The preprocessing step seems to have worked, but there are a few observations:
@@ -91,25 +96,16 @@ The preprocessing step seems to have worked, but there are a few observations:
 
 - Word Cloud Visualization: Create word clouds for both original and processed texts to visually compare the most prominent words.
 
-![image3](https://github.com/user-attachments/assets/3520bb4f-a929-427d-9e27-175469c05abf)
+![a](https://github.com/user-attachments/assets/4db8cb1b-50c3-4f88-ae1b-56154a64ebbe)
 
-![image4](https://github.com/user-attachments/assets/f3d5acfa-979f-4838-bfe6-129403f304b7)
-
+![b](https://github.com/user-attachments/assets/2fbef44b-d227-41b2-a5a9-efd0fb8114f1)
 
 - Unique Words Count: Compare the number of unique words in the original and processed datasets to see how much the vocabulary has been reduced.
           a. Original article vocabulary size: 612672
-          b. Processed article vocabulary size: 300207
+          b. Processed article vocabulary size: 269388
           c. Original summary vocabulary size: 172071
-          d. Processed summary vocabulary size: 96690
+          d. Processed summary vocabulary size: 93090
 
-- Top words in LDA topics:
-Topic 1: presiden, jakarta, partai, indonesia, ketua, liputan6, anggota, com, baca, pemerintah
-Topic 2: pemain, tim, musim, pertandingan, gol, klub, menit, liga, babak, bermain
-Topic 3: rp, jakarta, harga, com, liputan6, pemerintah, indonesia, minyak, dana, pt
-Topic 4: anak, jakarta, com, orang, liputan6, indonesia, dunia, sang, acara, mengaku
-Topic 5: warga, polisi, rumah, com, liputan6, korban, jakarta, jalan, jawa, kota
-
-- New compression ratio: 0.14
 
 #### 3. Distribution of Article Lengths
 This step examines the lengths of processed articles to understand the overall distribution within the dataset. By plotting a histogram, we can observe variations in article length and detect potential outliers or biases in the data. This analysis helps determine if certain article lengths dominate the dataset, which may impact the model’s performance.
