@@ -332,14 +332,14 @@ The summarization model uses a specific pre-trained BERT model called "cahya/ber
 BERT acts as the encoder, designed to understand and process the input text. Since this BERT model is pre-trained on Indonesian language data, it's well-suited for comprehending the context and linguistic features of Indonesian texts.
 In this step, BERT reads and encodes the input articles, generating contextual embeddings—representations of the text’s meaning and structure, which are used in the summarization process.
 
-<img width="1097" alt="Screen Shot 2024-10-22 at 22 28 36" src="https://github.com/user-attachments/assets/4849df6e-1b22-4d55-a03d-dee01a286be5">
+<img width="1094" alt="Screen Shot 2024-10-25 at 21 15 49" src="https://github.com/user-attachments/assets/fcf56efc-c5ff-48e8-af6e-0defa4443c84">
 
 ### 2. Loading the Pre-trained GPT-2 Model
 The second step involves loading the GPT-2 model, specifically "cahya/gpt2-small-indonesian-522M".
 GPT-2 is used as the decoder in this architecture. However, to make it work effectively in this summarization task, it needs to be modified to enable cross-attention. This means GPT-2 can now focus on the encoded information from the BERT model.
 After receiving the encoded input from BERT, GPT-2 generates the actual summary. It ensures that the output is not only grammatically fluent but also aligned with the meaning and context of the original article.
 
-<img width="1097" alt="Screen Shot 2024-10-22 at 22 28 36" src="https://github.com/user-attachments/assets/9d9005fc-34ec-4c68-a326-0bf2f06ac4be">
+<img width="1095" alt="Screen Shot 2024-10-25 at 21 15 58" src="https://github.com/user-attachments/assets/28d00587-938f-421b-b2c3-1e539904db73">
 
 ### Why This Approach Works
 By combining the pre-trained BERT and GPT-2 models, this summarizer leverages their strengths:
