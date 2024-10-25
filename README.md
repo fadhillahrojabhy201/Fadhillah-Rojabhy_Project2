@@ -379,70 +379,140 @@ This phase involves setting up the environment and the necessary configurations 
 #### Key Steps in Initial Training:
 ##### Training Arguments:
 Define how the training process will be managed, such as:
-1. Max Steps: Total number of training steps (e.g., 20,000 steps).
-2. Batch Sizes: Size of the batches for training and evaluation (e.g., 8 samples per batch).
-3. Warmup Steps: Initial steps where the learning rate increases gradually.
-4. Weight Decay: Regularization technique to avoid overfitting.
-5. Mixed Precision: Enabling mixed precision (FP16) to speed up training by reducing memory usage.
-6. Logging and Checkpoints: Log results at regular intervals and save model checkpoints less frequently to reduce storage requirements.
+1. Epochs: The model is set to train for 3 epochs, allowing it to iteratively refine its understanding of the data.
+2. Batch Sizes: The training and evaluation batches are set to 16 samples, ensuring a balance between performance and memory utilization.
+3. Warmup Steps: 500 warmup steps are included, where the learning rate gradually increases, helping stabilize training initially.
+4. Weight Decay: A weight decay of 0.01 is implemented as a regularization technique to prevent overfitting.
+5. Mixed Precision: The training utilizes mixed precision (FP16) to accelerate computation and reduce memory usage, allowing for larger batch sizes.
+6. Logging and Checkpoints: Logging is configured to capture results every 100 steps, while model checkpoints are saved every 1,000 steps to minimize storage usage.
+7. Gradient Accumulation: The training process incorporates gradient accumulation over 4 steps, allowing for effective training with limited memory resources.
 #### Trainer Creation:
-A Trainer object is created to handle the training process. It coordinates the loading of data, optimizes the model weights, and evaluates its performance on a validation dataset.
+An instance of the `Trainer class` is created to facilitate the training process. The trainer manages data loading, optimizes the model weights, and evaluates performance against a validation dataset. It abstracts much of the complexity involved in training, allowing for a more streamlined approach.
 #### Model Training:
-The actual training begins with the trainer.train() method. This process adjusts the model’s weights to minimize the loss function, gradually improving the model’s performance over time.
+The training process is initiated by calling the `train()` method on the trainer instance. During this phase, the model's weights are adjusted iteratively to minimize the loss function, enhancing the model's summarization capabilities. The training output includes updates on the training and validation loss at specified intervals, providing insight into the model's learning progress.
+#### Model Saving
+Upon completion of the optimized training, the model is saved to a specified directory, ensuring that the trained weights and configurations are preserved for future use.
+
 ### 2. Continue Training
 The Continued Training phase allows for the refinement of the model after it has been trained for a while. Instead of starting from scratch, training resumes from a saved checkpoint to further enhance performance.
 #### Key Steps in Continued Training:
 ##### Loading the Model from a Checkpoint:
-The model and tokenizer are reloaded from a previous checkpoint (e.g., after 15,000 steps). This ensures the training continues from where it last left off.
+The model and tokenizer are reloaded from a specified checkpoint directory, allowing the training to resume from the last saved state. This ensures that the model retains the knowledge gained during the initial training phase.
 ##### Defining Continued Training Arguments:
-The training arguments are slightly modified, such as reducing the number of warmup steps or changing how frequently the model is evaluated and checkpoints are saved. The checkpoint path is also specified so the training can resume from that point.
+The training arguments for continued training are defined with slight adjustments to optimize the process:
+1. Number of Epochs: Set to 2 epochs to allow for further fine-tuning.
+2. Batch Sizes: Maintained at 16 samples for both training and evaluation.
+3. Learning Rate: Reduced to 2e-5, which is lower than the initial training rate, promoting finer adjustments to the model weights.
+4. Warmup Steps: Set to 500 to allow a gradual increase in the learning rate at the start of training.
+5. Logging and Checkpoints: Similar logging intervals and checkpointing strategies are retained for consistency in monitoring the training progress.
+6. Best Model Loading: Configured to load the best model at the end of training based on evaluation loss.
 ##### Reinitializing the Trainer:
-A new Trainer is instantiated using the loaded model and the updated training arguments. This allows the training to resume seamlessly from the previous checkpoint.
+A new instance of the `Trainer` class is created, utilizing the loaded model and the updated training arguments. This setup allows the training process to continue seamlessly from the previous checkpoint.
 ##### Continuing Training:
-The training process resumes using trainer.train(), and the model continues to improve based on the remaining optimization steps.
+The training process is resumed by calling the `train()` method on the trainer instance. During this phase, the model continues to adjust its weights to minimize the loss function based on the remaining optimization steps. Training output includes updates on training and validation loss at specified intervals, providing insight into the model's improvement.
+
+##### Model Saving
+Upon completion of the continued training, the final model is saved to a designated directory, preserving the trained weights and configurations for future use. Additionally, the tokenizer is saved alongside the model to ensure compatibility during inference.
+
 ### Summary of Phases
 1. Initial Training: Starts the training from the beginning or a pre-trained state, using well-defined training arguments and datasets.
 2. Continue Training: Resumes training from a checkpoint, allowing incremental improvements to the model while saving time and resources.
-
 Both phases allow for flexibility, letting the model evolve through initial training and further refinement through continued training. This iterative approach helps achieve better performance over time while utilizing pre-existing model checkpoints.
 
 ## Evaluate Model
 The model evaluation process consists of two key components: tracking the training progress via loss graphs and measuring the model's performance using ROUGE scores. 
 
 ### Training and Validation Losses
-![image13](https://github.com/user-attachments/assets/412376aa-1367-4e49-b4da-90d1cdd70c89)
 
-<b>What it shows:</b> The graph plots the training loss and validation loss against the number of training steps.
+![1a](https://github.com/user-attachments/assets/04ca560c-3700-461b-8abc-b4e47235d9b2)
 
-    1. Training loss: This reflects how well the model is learning from the training dataset.
-    2. Validation loss: This measures the model’s performance on a separate validation dataset to avoid overfitting.
-    
-<b>Trend:</b> As training progresses, both the training and validation losses decrease, indicating that the model is improving. The difference between the two also indicates whether the model generalizes well or overfits.
+=== Training Summary ===
+Total Steps: 4800
+Number of Evaluations: 4
 
-### ROUGE Scores
-<b>What ROUGE is:</b>  ROUGE (Recall-Oriented Understudy for Gisting Evaluation) is a set of metrics used to evaluate the quality of summaries by comparing them to reference summaries. The key metrics are:
+Training Loss:
+Initial: 0.2962
+Final: 0.2593
+Minimum: 0.2546
+Mean: 0.2743
+Improvement: 0.0369
 
-ROUGE-1: Measures the overlap of unigrams (single words) between the generated summary and the reference summary.
+Validation Loss:
+Initial: 0.2983
+Final: 0.2768
+Minimum: 0.2768
+Mean: 0.2860
+Improvement: 0.0215
 
-ROUGE-2: Measures the overlap of bigrams (pairs of consecutive words) between the generated and reference summaries.
+The training and validation loss metrics demonstrate the effectiveness of the continued training phase for the Bert2GPT Indonesian Text Summarizer. The improvements in both metrics highlight the model's enhanced capacity for generating accurate summaries. These findings underscore the importance of monitoring loss during training to ensure that the model develops robust summarization capabilities. If further evaluations or optimizations are needed, monitoring these trends will be crucial for guiding the next steps in model refinement.
 
-ROUGE-L: Focuses on the longest common subsequence between the generated and reference summaries.
+### ROUGE Scores Evaluation
+The evaluation of the model's performance is presented through a comprehensive analysis of ROUGE scores, summary length distributions, and length correlations.
 
-![image14](https://github.com/user-attachments/assets/3e740102-b629-4e18-8f5c-d6a560b77c57)
+![1b](https://github.com/user-attachments/assets/23c9eb5e-e624-43de-aa22-a9d114c976f1)
 
-<b>What the graph shows:</b> The bar chart presents the model’s performance on ROUGE-1, ROUGE-2, and ROUGE-L scores. Each metric is broken down into:
+#### ROUGE Scores Comparison
+The first visualization illustrates the comparison of ROUGE scores across different metrics:
+ROUGE-1 Scores:
+- Recall: 0.675 (67.5%)
+- Precision: 0.236 (23.6%)
+- F1: 0.349 (34.9%)
 
-    - Recall: Measures how much of the reference summary’s content is captured in the generated summary.
-    - Precision: Measures how much of the generated summary’s content is relevant compared to the reference.
-    - F1 Score: A balanced metric combining both recall and precision.
+ROUGE-2 Scores:
+- Recall: 0.277 (27.7%)
+- Precision: 0.071 (7.1%)
+- F1: 0.113 (11.3%)
+
+ROUGE-L Scores:
+- Recall: 0.594 (59.4%)
+- Precision: 0.206 (20.6%)
+- F1: 0.306 (30.6%)
+These scores reflect the model's ability to capture n-grams and the longest common subsequence between generated and reference summaries.
+#### ROUGE ROUGE Scores Heatmap
+The heatmap further visualizes the ROUGE scores, providing an at-a-glance understanding of the performance across different metrics. The color intensity indicates the magnitude of each score, with higher values represented in deeper colors.
 
 
-### Model’s Performance:
-    1. ROUGE-1 has a high recall score (~0.675), meaning that the generated summaries capture a significant portion of the content from the reference summaries. However, the precision (~0.212) and F1 score (~0.322) are lower, indicating that while the summaries include important parts of the text, they may also contain irrelevant or unnecessary information.
-    2. ROUGE-2 shows lower recall, precision, and F1 scores, which is expected because bigrams (word pairs) are harder to match exactly.
-    3. ROUGE-L performs similarly to ROUGE-1, suggesting the model captures important sentence structures and sequences in the summaries.
+![1c](https://github.com/user-attachments/assets/2859a19d-cbcd-4d3d-8434-039b40a3d308)
 
-The evaluation results show that the Bert2GPT Indonesian Text Summarizer effectively generates relevant summaries, as evidenced by the decreasing training and validation losses and reasonable ROUGE scores. While the model performs well in terms of recall, it has room for improvement in precision, which would help generate more concise and relevant summaries.
+#### Summary Length Distribution
+Thee distribution of summary lengths for both generated and reference summaries:
+- Generated Summaries: The box plot reveals that generated summaries tend to be longer, with a range of 58 to 69 words.
+- Reference Summaries: The reference summaries are shorter, with a range of 12 to 20 words. This highlights that the model generates more extensive summaries compared to the provided references.
+#### Length Correlation
+The scatter plot on the right illustrates the correlation between the lengths of the reference summaries and the generated summaries. Although there is a positive correlation, it indicates that the generated summaries tend to be significantly longer than the references, suggesting that the model may be providing more
+
+#### Summary Length Analysis
+Length Statistics:
+                Generated    Reference
+Count           5.000000    5.000000
+Mean           62.400000   16.600000
+Std             4.505552    3.130495
+Min            58.000000   12.000000
+Median         60.000000   16.000000
+Max            69.000000   20.000000
+
+#### Example Analysis
+`Example Summary:
+Reference (16 words): 
+"Tim peneliti ITB kembangkan teknologi pengolahan limbah ramah lingkungan 
+yang berpotensi mengurangi polusi air dan udara."
+
+Generated (60 words):
+"[UNK] bandung - sebuah tim peneliti dari institut teknologi bandung (itb) 
+baru-baru ini berhasil mengembangkan teknologi baru dalam pengolahan 
+limbah yang lebih ramah lingkungan. teknologi ini, yang menggunakan 
+proses biologis untuk mengurai limbah industri, diharapkan dapat secara 
+signifikan mengurangi polusi air dan udara di sekitar area industri."
+
+Length Ratio: 3.75`
+
+#### Performance Metrics Assessment
+✓ All key ROUGE metrics meet acceptable thresholds:
+
+ROUGE-1 F1 > 0.3 (Achieved: 0.349)
+ROUGE-2 F1 > 0.1 (Achieved: 0.113)
+ROUGE-L F1 > 0.25 (Achieved: 0.306)
+
 
 ## Results
 ### Testing the Model
