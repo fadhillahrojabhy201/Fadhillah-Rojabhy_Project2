@@ -513,14 +513,154 @@ ROUGE-1 F1 > 0.3 (Achieved: 0.349)
 ROUGE-2 F1 > 0.1 (Achieved: 0.113)
 ROUGE-L F1 > 0.25 (Achieved: 0.306)
 
+### Advanced Model Evaluation Metrics
+
+![1d](https://github.com/user-attachments/assets/9eb4c9d8-3c72-432c-9288-6bcc64640c4b)
+
+The evaluation of the summarization model involves a detailed look at several key metrics, providing insights into its performance.
+
+#### Distribution of Scores
+The first chart showcases how different evaluation metrics stack up:
+
+- BLEU Score: This metric measures the overlap of n-grams (contiguous sequences of words) between the generated summaries and the reference texts. A lower BLEU score indicates challenges in retaining the original phrasing.
+- METEOR Score: Unlike BLEU, METEOR evaluates semantic similarity, taking into account synonyms and stemming, which helps capture a broader range of meanings. The scores here show a moderate variability.
+- Coverage: This metric assesses how much of the reference content is included in the generated summary, revealing the model's effectiveness in capturing essential points.
+- Sentiment Similarity: This score indicates how closely the sentiment of the generated summaries matches that of the reference summaries.
+The box plot reveals that BLEU scores have the least variation and the highest median, suggesting it's the most consistent metric for evaluating summarization quality.
+
+#### Length Ratios Distribution
+In this section, we examine the length ratios of the generated summaries compared to their reference counterparts. An ideal length ratio of 1 (meaning the generated summary is the same length as the reference) is marked with a red dashed line. The histogram indicates that most generated summaries tend to be longer than the references, which may suggest the need for better control over summary length.
+
+#### Redundancy vs. Coverage
+The scatter plot illustrates the relationship between redundancy scores (how repetitive the generated summaries are) and content coverage (how much reference content is captured). Lower redundancy scores imply a richer vocabulary in the summaries, while higher coverage indicates a closer alignment with reference texts. The spread of the points suggests room for improvement in balancing these two aspects.
+
+#### Per-Summary Performance Heatmap
+The heatmap offers a breakdown of performance for each summary across various metrics, including BLEU, METEOR, coverage, and sentiment similarity. This visual aid helps identify which summaries performed well and which need enhancement.
 
 ## Results
 ### Testing the Model
 #### 1. Load the Tokenizer and Model
-    i. Tokenizer: The tokenizer used for the summarization is "cahya/bert2gpt-indonesian-summarization". It splits the input text into tokens that the model can process. Two special tokens are configured:
-        a. BOS (Beginning of Sequence): Marks the start of the input.
-        b. EOS (End of Sequence): Marks the end of the input.
-    ii. Model: The summarization model is loaded from a specific checkpoint (e.g., "/content/drive/MyDrive/continued_results/checkpoint-15001"), which contains the learned weights and configurations from previous training steps. These weights allow the model to generate summaries effectively.
+The tokenizer used is "cahya/bert2gpt-indonesian-summarization," which converts text into tokens suitable for model processing. Special tokens are set for the beginning (BOS) and end (EOS) of sequences.
+The model is loaded from a checkpoint, enabling it to utilize previously learned parameters for generating summaries.
+#### 2. Test Articles with Reference Summaries
+Two test articles were provided, each accompanied by a reference summary. These articles cover topics related to the Indonesian military's political neutrality and the PKS party's stance on corruption.
+#### 3. Generate Summary
+The function generate_summary(article) generates a summary of the input article using parameters like minimum and maximum length, beam search for optimizing output, repetition penalties to avoid redundancy, and various sampling techniques for more diverse output.
+#### 4. Evaluate Summary
+The function `evaluate_summary(generated, reference)` computes several metrics, including:
+- ROUGE scores to assess overlap with the reference summaries.
+- BLEU score for n-gram precision.
+- Length ratio to compare the length of the generated summary against the reference.
+#### 5. Run Tests and Collect Results
+Each article is processed, and the generated summaries are compared to their respective references, yielding metrics for evaluation.
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Test Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Model Test Results</h2>
+
+<table>
+    <tr>
+        <th>Article</th>
+        <th>Generated Summary</th>
+        <th>Reference Summary</th>
+        <th>ROUGE-1 F</th>
+        <th>ROUGE-2 F</th>
+        <th>ROUGE-L F</th>
+        <th>BLEU</th>
+        <th>Length Ratio</th>
+    </tr>
+    <tr>
+        <td>Article 1</td>
+        <td>[UNK] mantan presiden pks hidayat nur wahid mengatakan, tni adalah alat negara yang harus netral dan berada di atas seluruh kekuatan politik yang ada. ini untuk menjaga keamanan teritorial dan keutuhan negara kesatuan republik indonesia. kata hidayat, anggota komisi i dpr ri itu. akan ditentukan oleh undang - undangnya dalam pemilu atau pilkada jika sudah tidak ada hambatan yang mengganggu kekesalan. apa pun terjadi di dpr?</td>
+        <td>TNI harus profesional dan netral dalam politik. Pemberian hak pilih TNI dalam pemilu perlu diatur melalui undang-undang.</td>
+        <td>0.1600</td>
+        <td>0.0247</td>
+        <td>0.1600</td>
+        <td>0.0000</td>
+        <td>3.8824</td>
+    </tr>
+    <tr>
+        <td>Article 2</td>
+        <td>[UNK] pks mengingatkan agar pemerintah tidak tebang pilih dalam menindak para koruptor. pks juga meminta kpk lebih aktif dalam menangani kasus - kasus korupsi besar yang merugikan negara. namun, pks mengimbau agar penegakan hukum dilakukan secara adil dan tak tebangnya. beberapa hari ini ( 18 / 6 ). " kata ketua dpp pks hidayat nur wahid di jakarta, jumat ( 19 / 9 )</td>
+        <td>PKS mendukung pemberantasan korupsi dan meminta penegakan hukum dilakukan secara adil tanpa tebang pilih.</td>
+        <td>0.2899</td>
+        <td>0.1316</td>
+        <td>0.2319</td>
+        <td>0.0605</td>
+        <td>4.5714</td>
+    </tr>
+</table>
+
+<h2>Average Metrics Across All Tests</h2>
+<table>
+    <tr>
+        <th>Metric</th>
+        <th>Average Value</th>
+    </tr>
+    <tr>
+        <td>ROUGE-1 F</td>
+        <td>0.2249</td>
+    </tr>
+    <tr>
+        <td>ROUGE-2 F</td>
+        <td>0.0781</td>
+    </tr>
+    <tr>
+        <td>ROUGE-L F</td>
+        <td>0.1959</td>
+    </tr>
+    <tr>
+        <td>BLEU</td>
+        <td>0.0302</td>
+    </tr>
+    <tr>
+        <td>Length Ratio</td>
+        <td>4.2269</td>
+    </tr>
+</table>
+
+<h2>Recommendations</h2>
+<ul>
+    <li>Content Preservation: Focus on improving how well the model retains key information from the source text.</li>
+    <li>Phrase-Level Accuracy: Aim to enhance the accuracy of phrases to achieve better ROUGE-2 scores.</li>
+    <li>Length Conciseness: Adjust parameters to ensure summaries are more concise, especially since the average length ratio exceeds 2.</li>
+    <li>Beam Search Parameters: Review and tweak beam search parameters to enhance fluency and coherence in generated summaries.</li>
+</ul>
+
+</body>
+</html>
+
+
+
+
 #### 2. Tokenizer Configuration
 The tokenizer is configured with BOS and EOS tokens to ensure proper formatting of the input text for the model. These tokens help the model understand where the input begins and ends, which is important for accurate summarization.
 #### 3. Model Loading
@@ -542,52 +682,6 @@ The parameters used during the summary generation include:
     - Repetition Penalty: Ensures that the summary does not repeat the same words unnecessarily.
 ### 7. Decoding the Summary
 The summary generated by the model is in the form of token IDs, which need to be decoded back into human-readable text. Special tokens such as BOS and EOS are removed during this step, resulting in a concise, readable summary of the original article.
-
-<table border="1" cellpadding="10" cellspacing="0">
-  <tr>
-    <th>Aspect</th>
-    <th>Details</th>
-  </tr>
-  <tr>
-    <td>Article to Summarize</td>
-    <td>Liputan6.com, Jakarta: Tentara Nasional Indonesia hendaknya benar-benar profesional. TNI juga harus berada di atas seluruh kekuatan politik yang ada. Demikian permintaan mantan Presiden Partai Keadilan Sejahtera Hidayat Nur Wahid, di sela-sela Munas PKS, Sabtu (19/6), di Jakarta. TNI adalah alat negara yang harus netral dan berada di atas seluruh kekuatan politik yang ada. Ini untuk menjaga keamanan teritorial dan keutuhan Negara Kesatuan Republik Indonesia, kata Hidayat. Menurutnya, TNI baru mungkin memiliki hak pilih pada pemilu jika diatur secara konstitusional melalui undang-undang. Saya kira wacana TNI memiliki hak pilih dalam pemilu harus melalui pembahasan lebih lanjut di DPR, ujar anggota Komisi I DPR RI itu. Dari pembicaraan dengan pimpinan TNI, sampai saat ini TNI masih memilih belum terlibat di pemilu. Hal ini belajar dari pengalaman pada pemilu 1955, di mana TNI terlibat sehingga terbelah pada sejumlah kekuatan politik.</td>
-  </tr>
-  <tr>
-    <td>Summarization Parameters</td>
-    <td>min_length=20, max_length=80, num_beams=10, repetition_penalty=2.5, length_penalty=1.0, early_stopping=True, no_repeat_ngram_size=2, use_cache=True, do_sample=True, temperature=0.3, top_k=50, top_p=0.95</td>
-  </tr>
-  <tr>
-    <td>Generated Summary</td>
-    <td>[UNK] mantan presiden pks hidayat nur wahid mengatakan tni adalah alat negara yang harus netral dan berada di atas seluruh kekuatan politik yang ada. tni baru mungkin memiliki hak pilih pada pemilu jika diatur secara konstitusional melalui undang - undangan.ikapijiran ke dpr. hal ini membuat sistem keamanan nasional menjadi tidak optimal bagi anggota tni / 6, bisa ditentukan oleh uu itu. apa pun mengganggu kekompakan.</td>
-  </tr>
-  <tr>
-    <td>ROUGE Scores for new Summary</td>
-    <td>
-      <ul>
-        <li>ROUGE-1: r: 1.0, p: 1.0, f: 0.999999995</li>
-        <li>ROUGE-2: r: 1.0, p: 1.0, f: 0.999999995</li>
-        <li>ROUGE-L: r: 1.0, p: 1.0, f: 0.999999995</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td>Error Analysis</td>
-    <td>
-      <ul>
-        <li>Too Short: 0</li>
-        <li>Too Long: 1</li>
-        <li>Missing Key Information: 0</li>
-        <li>Other: 0</li>
-      </ul>
-    </td>
-  </tr>
-</table>
-
-
-### Summary
-1. The summarization model produced a concise and relevant summary of the input article, focusing on key information such as the neutrality of the TNI and its role in national security.
-2. ROUGE scores indicate that the generated summary captures most of the essential content, but there is room for improvement, especially in terms of precision and fluency.
-3. The error analysis revealed that the summary was slightly longer than necessary, but did not miss key information or show other major issues.
 
 
 ## Improvements
